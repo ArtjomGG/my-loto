@@ -1,5 +1,5 @@
 package com.bta.myloto.dao;
 
-public interface Dao<E> {
+public interface BaseRepository<E> {
     int saveOrUpdate(E entity);
 }

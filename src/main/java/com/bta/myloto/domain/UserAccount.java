@@ -3,6 +3,7 @@ package com.bta.myloto.domain;
 public class UserAccount {
     private Long id;
     private String userName;
+    private String userPassword;
     private String firstName;
     private String lastName;
     private Long isikuKood;
@@ -23,6 +24,14 @@ public class UserAccount {
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    public String getUserPassword() {
+        return userPassword;
+    }
+
+    public void setUserPassword(String userPassword) {
+        this.userPassword = userPassword;
     }
 
     public String getFirstName() {
