@@ -24,13 +24,14 @@ public class MyLotoApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		UserAccount user1 = new UserAccount();
+
+		/*UserAccount user1 = new UserAccount();
 		user1.setUserName("artjom.gg@gmail.com");
 		user1.setUserPassword("artjomgg");
 		user1.setFirstName("Artjom");
 		user1.setLastName("Guguljan");
 		user1.setIsikuKood(38205050248l);
-		user1.setEmail("artjom.gg@gmail.com");
+		user1.setEmail("artjom.gg@gmail.com");*/
 
 		//userAccountRepository.saveOrUpdate(user1);
 
@@ -38,6 +39,8 @@ public class MyLotoApplication implements CommandLineRunner {
 		System.out.println(loginChek1);
 		boolean artjomgg = userAccountService.login("artjom.gg@gmail.com", "artjomgg");
 		System.out.println(artjomgg);
+        boolean loginChek3 = userAccountService.login("adggadj", "hhuhuhu");
+        System.out.println(loginChek1);
 
 	}
 }

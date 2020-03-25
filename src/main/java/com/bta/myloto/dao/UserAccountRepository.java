@@ -10,6 +10,8 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
+import java.util.Optional;
 
 @Repository // Onvechaet to chto budet sozdan BEAN v Contekste
 public class UserAccountRepository implements BaseRepository<UserAccount> {
@@ -37,26 +39,22 @@ public class UserAccountRepository implements BaseRepository<UserAccount> {
                 entity.getEmail());
     }
 
-    public UserAccount findUserAccountByUserName (String userName) {
+    public List<UserAccount> findUserAccountByUserName (String userName) {
 
         String sql = "select * from user_account where userName = :userName";
         MapSqlParameterSource map = new MapSqlParameterSource();
         map.addValue("userName", userName);
 
-        RowMapper <UserAccount> mapper = (resultSet, i) -> { // BiFunction: prinimaet dva parametra (resultSet, i) vozvrashaet user-a
-            UserAccount userForMapper = new UserAccount();
-            userForMapper.setId(resultSet.getLong("id"));
-            userForMapper.setUserName(resultSet.getString("userName"));
-            userForMapper.setUserPassword(resultSet.getString("userPassword"));
-            userForMapper.setFirstName(resultSet.getString("firstName"));
-            userForMapper.setLastName(resultSet.getString("lastName"));
-            userForMapper.setIsikuKood(resultSet.getLong("isikuKood"));
-            userForMapper.setEmail(resultSet.getString("email"));
-
-            return userForMapper;
-        };
-
-        return namedParameterJdbcTemplate.queryForObject(sql,map, mapper);
+    // BiFunction: prinimaet dva parametra (resultSet, i) vozvrashaet user-a
+        return namedParameterJdbcTemplate.query(sql, map, (resultSet, i) ->
+                new UserAccount(resultSet.getLong("id"),
+                        resultSet.getString("userName"),
+                        resultSet.getString("userPassword"),
+                        resultSet.getString("firstName"),
+                        resultSet.getString("lastName"),
+                        resultSet.getLong("isikuKood"),
+                        resultSet.getString("email")
+                ));
 
     }
 

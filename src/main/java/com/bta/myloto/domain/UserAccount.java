@@ -9,6 +9,15 @@ public class UserAccount {
     private Long isikuKood;
     private String email;
 
+    public UserAccount(Long id, String userName, String userPassword, String firstName, String lastName, Long isikuKood, String email) {
+        this.id = id;
+        this.userName = userName;
+        this.userPassword = userPassword;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.isikuKood = isikuKood;
+        this.email = email;
+    }
 
     public Long getId() {
         return id;
