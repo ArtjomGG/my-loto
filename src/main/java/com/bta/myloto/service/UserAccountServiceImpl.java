@@ -1,6 +1,8 @@
 package com.bta.myloto.service;
 
+import com.bta.myloto.dao.LotoTicketRepository;
 import com.bta.myloto.dao.UserAccountRepository;
+import com.bta.myloto.domain.LotoTicket;
 import com.bta.myloto.domain.UserAccount;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,6 +12,9 @@ import java.util.Optional;
 
 @Service
 public class UserAccountServiceImpl implements UserAccountService {
+
+    @Autowired
+    private LotoTicketRepository lotoTicketRepository;
 
     @Autowired
     private UserAccountRepository userAccountRepository;
@@ -27,5 +32,10 @@ public class UserAccountServiceImpl implements UserAccountService {
         }
 
         return false;
+    }
+
+    @Override
+    public void registrationTicket(LotoTicket ticket) {
+        lotoTicketRepository.saveOrUpdate(ticket);
     }
 }

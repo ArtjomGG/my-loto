@@ -8,8 +8,7 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,6 +37,27 @@ public class UserAccountRepository implements BaseRepository<UserAccount> {
                 entity.getIsikuKood(),
                 entity.getEmail());
     }
+
+    @Override
+    public Integer delete(Long id) {
+        String sql = "delete from book where id =?";
+        Integer affectedRows = 0;
+
+        //return namedParameterJdbcTemplate.update(sql,(int)(id));
+
+        /*
+             PreparedStatement preparedStatement = connection.prepareStatement(sql);) {
+
+            preparedStatement.setLong(1, id);
+            affectedRows = preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }*/
+
+        return null;
+    }
+
 
     public List<UserAccount> findUserAccountByUserName (String userName) {
 

@@ -1,7 +1,7 @@
 package com.bta.myloto.domain;
 
-public class UserAccount {
-    private Long id;
+public class UserAccount extends BaseEntenty {
+
     private String userName;
     private String userPassword;
     private String firstName;
@@ -10,21 +10,13 @@ public class UserAccount {
     private String email;
 
     public UserAccount(Long id, String userName, String userPassword, String firstName, String lastName, Long isikuKood, String email) {
-        this.id = id;
+        super(id);
         this.userName = userName;
         this.userPassword = userPassword;
         this.firstName = firstName;
         this.lastName = lastName;
         this.isikuKood = isikuKood;
         this.email = email;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getUserName() {

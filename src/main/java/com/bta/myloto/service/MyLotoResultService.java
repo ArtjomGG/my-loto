@@ -1,42 +1,87 @@
 package com.bta.myloto.service;
 
+import com.bta.myloto.dao.MyLotoResultRepository;
+import com.bta.myloto.domain.MyLotoResult;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Set;
+import java.time.LocalDateTime;
+import java.util.*;
 import java.util.stream.Stream;
 
 //Sgenerit chisla ot 1 do 48 i sloshit v Set iz 6-ti chisel, i potom vernjot' etot Set
 
 @Service
-public class MyLotoResultService implements ResultService{
+public class MyLotoResultService implements ResultService {
+
+    @Autowired
+    private MyLotoResultRepository myLotoResultRepository;
+
     @Override
-    public Set<Integer> getResults() {
-        //todo implemet as HomeWork
-        return null;
+    public MyLotoResult getResults() {
+
+        Set<Integer> results = new HashSet<>();
+
+        /*results.add((int)(Math.random()*49+1));
+        results.add((int)(Math.random()*49+1));
+        results.add((int)(Math.random()*49+1));
+        results.add((int)(Math.random()*49+1));
+        results.add((int)(Math.random()*49+1));
+        results.add((int)(Math.random()*49+1));*/
+
+        Random random = new Random();
+        while (results.size() < 6) {
+            results.add(random.nextInt(49) + 1);
+        }
+        Iterator<Integer> iterator = results.iterator();
+        int num1 = iterator.next();
+        int num2 = iterator.next();
+        int num3 = iterator.next();
+        int num4 = iterator.next();
+        int num5 = iterator.next();
+        int num6 = iterator.next();
+
+        MyLotoResult myLotoResults = new MyLotoResult(0L, LocalDateTime.now(), num1, num2, num3, num4, num5, num6);
+        myLotoResultRepository.saveOrUpdate(myLotoResults);
+
+        return myLotoResults;
     }
 
     @Override
     public Integer evaluateWin(Set<Integer> results, Set<Integer> bets) {
-        int count = (int)bets.stream().filter(integer -> results.contains(integer)).count();
+        int count = (int) bets.stream().filter(integer -> results.contains(integer)).count();
+        int prize = 0;
         switch (count) {
-            case 0:
-            case 1:
-                return 0;
             case 2:
-                return 10;
+                prize = 10;
+                break;
             case 3:
-                return 50;
+                prize = 50;
+                break;
             case 4:
-                return 100;
+                prize = 100;
+                break;
             case 5:
-                return 5000;
+                prize = 5000;
+                break;
             case 6:
-                return 25000;
+                prize = 25000;
+                break;
             default:
-                return 0;
+                System.out.println("Sorry! Try again");
+
+        }
+        System.out.println("Your ticket numbers " + bets);
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
 
-    }
+        System.out.println("Loto results " + results);
+        System.out.println("You have " + count + " matches");
+        System.out.println("Your prize " + prize + " Eoros");
 
+        return prize;
+    }
 }
