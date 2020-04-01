@@ -6,4 +6,5 @@ import com.bta.myloto.domain.UserAccount;
 public interface UserAccountService {
     boolean login(String userName, String userPassword);
     void registrationTicket (LotoTicket ticket);
+    int registration(UserAccount userAccount);
 }
