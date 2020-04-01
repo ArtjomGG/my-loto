@@ -36,7 +36,7 @@ public class MyLotoResultRepository implements BaseRepository<MyLotoResult>{
     }
 
     @Override
-    public Integer delete(Long id) {
+    public Integer delete(MyLotoResult entity) {
         return null;
     }
 }

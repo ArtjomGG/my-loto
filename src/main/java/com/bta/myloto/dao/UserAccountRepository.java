@@ -3,14 +3,11 @@ package com.bta.myloto.dao;
 import com.bta.myloto.domain.UserAccount;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import java.sql.*;
 import java.util.List;
-import java.util.Optional;
 
 @Repository // Onvechaet to chto budet sozdan BEAN v Contekste
 public class UserAccountRepository implements BaseRepository<UserAccount> {
@@ -39,23 +36,12 @@ public class UserAccountRepository implements BaseRepository<UserAccount> {
     }
 
     @Override
-    public Integer delete(Long id) {
-        String sql = "delete from book where id =?";
-        Integer affectedRows = 0;
+    public Integer delete(UserAccount ententy) {
+        String sql = "delete from user_account where userName = :userName";
+        MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
+        mapSqlParameterSource.addValue("userName", ententy.getUserName());
+        return namedParameterJdbcTemplate.update(sql,mapSqlParameterSource);
 
-        //return namedParameterJdbcTemplate.update(sql,(int)(id));
-
-        /*
-             PreparedStatement preparedStatement = connection.prepareStatement(sql);) {
-
-            preparedStatement.setLong(1, id);
-            affectedRows = preparedStatement.executeUpdate();
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }*/
-
-        return null;
     }
 
 

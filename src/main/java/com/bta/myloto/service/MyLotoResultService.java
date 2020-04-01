@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.*;
-import java.util.stream.Stream;
 
 //Sgenerit chisla ot 1 do 48 i sloshit v Set iz 6-ti chisel, i potom vernjot' etot Set
 
@@ -83,5 +82,12 @@ public class MyLotoResultService implements ResultService {
         System.out.println("Your prize " + prize + " Eoros");
 
         return prize;
+    }
+
+    @Override
+    public List<MyLotoResult> getAllResults() {
+        //TODO implenet at home
+        // vsjat repositorij FindAll i vsjat vase dann6
+        return null;
     }
 }

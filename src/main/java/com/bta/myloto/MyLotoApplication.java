@@ -5,8 +5,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication // Ctrl+Q na nej processor, kotor6j soderzhit podprocess6
-public class MyLotoApplication implements CommandLineRunner {
 
+public class MyLotoApplication implements CommandLineRunner {
+//Mozno udalit' 11-18 stroki
    /* @Autowired // avtomoticeski svjas6vaet i dostanet iz konteksta
     private UserAccountRepository userAccountRepository;
 */

@@ -41,7 +41,7 @@ public class LotoTicketRepository implements BaseRepository<LotoTicket>{
     }
 
     @Override
-    public Integer delete(Long id) {
+    public Integer delete(LotoTicket entity) {
         return null;
     }
 }
