@@ -20,48 +20,58 @@ public class UserAccountRepository implements BaseRepository<UserAccount> {
 
     @Override
     public int saveOrUpdate(UserAccount entity) { // ne moshet b6t' static
-        return jdbcTemplate.update("insert into user_account (userName, " +
-                        "userPassword, " +
+        return jdbcTemplate.update("insert into user_account (" +
+                        "username, " +
+                        "password, " +
                         "firstName, " +
                         "lastName, " +
                         "isikuKood, " +
-                        "email) " +
-                        "values (?, ?, ?, ?, ?, ?)",
-                entity.getUserName(),
-                entity.getUserPassword(),
+                        "email," +
+                        "active," +
+                        "role) " +
+                        "values (?, ?, ?, ?, ?, ?, ?, ?)",
+                entity.getUsername(),
+                entity.getPassword(),
                 entity.getFirstName(),
                 entity.getLastName(),
                 entity.getIsikuKood(),
-                entity.getEmail());
+                entity.getEmail(),
+                entity.isActive(),
+                entity.getRole());
     }
 
     @Override
     public Integer delete(UserAccount ententy) {
-        String sql = "delete from user_account where userName = :userName";
+        String sql = "delete from user_account where username = :username";
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
-        mapSqlParameterSource.addValue("userName", ententy.getUserName());
-        return namedParameterJdbcTemplate.update(sql,mapSqlParameterSource);
+        mapSqlParameterSource.addValue("username", ententy.getUsername());
 
+        return namedParameterJdbcTemplate.update(sql,mapSqlParameterSource);
+    }
+
+    @Override
+    public List<UserAccount> findAll(UserAccount entity) {
+        return null;
     }
 
 
-    public List<UserAccount> findUserAccountByUserName (String userName) {
+    public List<UserAccount> findUserAccountByUserName (String username) {
 
-        String sql = "select * from user_account where userName = :userName";
+        String sql = "select * from user_account where username = :username";
         MapSqlParameterSource map = new MapSqlParameterSource();
-        map.addValue("userName", userName);
+        map.addValue("username", username);
 
     // BiFunction: prinimaet dva parametra (resultSet, i) vozvrashaet user-a
         return namedParameterJdbcTemplate.query(sql, map, (resultSet, i) ->
                 new UserAccount(resultSet.getLong("id"),
-                        resultSet.getString("userName"),
-                        resultSet.getString("userPassword"),
+                        resultSet.getString("username"),
+                        resultSet.getString("password"),
                         resultSet.getString("firstName"),
                         resultSet.getString("lastName"),
                         resultSet.getLong("isikuKood"),
+                        resultSet.getBoolean("active"),
+                        resultSet.getString("role"),
                         resultSet.getString("email")
                 ));
-
     }
-
 }

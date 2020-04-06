@@ -1,14 +1,7 @@
-<!DOCTYPE HTML>
-<html>
-    <head>
-        <meta charset="UTF-8"/>
-        <title>${myTitle}</title>
-    </head>
-    <body>
-        <h1>${myTitle}</h1>
-        <h2>${myTitle}</h2>
-        <h3>${myTitle}</h3>
-        <br/>
-        <div>My First Page</div>
-    </body>
-</html>
+<#import "macro/base.ftl" as base>
+<@base.page>
+    <h1>Welcome to MyLoto Page!!!</h1>
+    <a href="loto/play">Go and Play!!!</a>
+    <a href="loto/results">Chek Results!!!</a>
+    <a href="/registration">Sign Up!!!</a>
+</@base.page>

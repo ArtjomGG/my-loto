@@ -33,7 +33,7 @@ public class UserAccountServiceImpl implements UserAccountService {
 
         UserAccount userAccount = userAccounts.get(0);
 
-        if (bCryptPasswordEncoder.matches(userPassword, userAccount.getUserPassword())) {
+        if (bCryptPasswordEncoder.matches(userPassword, userAccount.getPassword())) {
 
             return true;
         }
@@ -53,14 +53,13 @@ public class UserAccountServiceImpl implements UserAccountService {
     // 4.Sohranit' User-a
 
     public int registration(UserAccount userAccount) {
-        List<UserAccount> userAccounts = userAccountRepository.findUserAccountByUserName(userAccount.getUserName());
+        List<UserAccount> userAccounts = userAccountRepository.findUserAccountByUserName(userAccount.getUsername());
         if (!userAccounts.isEmpty()) { // proverjaet, est' li v sesteme User s UserName uzhe
-            throw new RuntimeException("User with " + userAccount.getUserName() + "already exist, try another!");
+            throw new RuntimeException("User with " + userAccount.getUsername() + "already exist, try another!");
         }
-
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-        String encodedPassword = bCryptPasswordEncoder.encode(userAccount.getUserPassword());
-        userAccount.setUserPassword(encodedPassword);
+        String encodedPassword = bCryptPasswordEncoder.encode(userAccount.getPassword());
+        userAccount.setPassword(encodedPassword);
 
         return userAccountRepository.saveOrUpdate(userAccount);
     }

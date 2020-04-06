@@ -88,6 +88,8 @@ public class MyLotoResultService implements ResultService {
     public List<MyLotoResult> getAllResults() {
         //TODO implenet at home
         // vsjat repositorij FindAll i vsjat vase dann6
+        List<MyLotoResult> resultList = new ArrayList<>();
+
         return null;
     }
 }

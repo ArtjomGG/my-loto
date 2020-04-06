@@ -2,37 +2,46 @@ package com.bta.myloto.domain;
 
 public class UserAccount extends BaseEntenty {
 
-    private String userName;
-    private String userPassword;
+    private String username;
+    private String password;
     private String firstName;
     private String lastName;
     private Long isikuKood;
     private String email;
+    private boolean active;
+    private String role = "USER";
 
-    public UserAccount(Long id, String userName, String userPassword, String firstName, String lastName, Long isikuKood, String email) {
+    public UserAccount() {
+        super(null);
+        this.active = true;
+    }
+
+    public UserAccount(Long id, String username, String password, String firstName, String lastName, Long isikuKood, Boolean active, String role, String email) {
         super(id);
-        this.userName = userName;
-        this.userPassword = userPassword;
+        this.username = username;
+        this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.isikuKood = isikuKood;
         this.email = email;
+        this.active = active;
+        this.role = role;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getUserPassword() {
-        return userPassword;
+    public String getPassword() {
+        return password;
     }
 
-    public void setUserPassword(String userPassword) {
-        this.userPassword = userPassword;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getFirstName() {
@@ -65,5 +74,21 @@ public class UserAccount extends BaseEntenty {
 
     public void setIsikuKood(Long isikuKood) {
         this.isikuKood = isikuKood;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }

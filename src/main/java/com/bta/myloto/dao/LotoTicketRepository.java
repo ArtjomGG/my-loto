@@ -6,6 +6,8 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public class LotoTicketRepository implements BaseRepository<LotoTicket>{
 
@@ -42,6 +44,11 @@ public class LotoTicketRepository implements BaseRepository<LotoTicket>{
 
     @Override
     public Integer delete(LotoTicket entity) {
+        return null;
+    }
+
+    @Override
+    public List<LotoTicket> findAll(LotoTicket entity) {
         return null;
     }
 }
